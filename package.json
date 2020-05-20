@@ -1,0 +1,31 @@
+{
+  "name": "express-eblock",
+  "version": "1.0.0",
+  "description": "Backend for React E-Block",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev"  : "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Monfernape/express-eblock.git"
+  },
+  "author": "Usman Khalil, Usman Qadir, Zubaid Rasool",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Monfernape/express-eblock/issues"
+  },
+  "homepage": "https://github.com/Monfernape/express-eblock#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.4",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  }
+}
