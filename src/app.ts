@@ -1,12 +1,13 @@
 import express, {Application, Response, Request, NextFunction} from "express"
+import dotenv from "dotenv"
 
+dotenv.config()
 const app: Application = express()
 
-const add = (a: number, b: number): number => a+b
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-    console.log(add(1,1))
-    res.send("Hello Bois")
+    console.log("Server", process.env.PORT)
+    res.send("Hello People")
 })
 
 app.listen(3001, () => console.log("Server started at port 3001"))
