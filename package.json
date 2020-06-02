@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/Monfernape/express-eblock/issues"
   },
+  "engines": {
+    "node": "14.2.0"
+  },
   "homepage": "https://github.com/Monfernape/express-eblock#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
