@@ -10,4 +10,4 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     res.send("Hello People")
 })
 
-app.listen(3001, () => console.log("Server started at port 3001"))
+app.listen((process.env.PORT||3001), () => console.log("Server started at port 3001"))
