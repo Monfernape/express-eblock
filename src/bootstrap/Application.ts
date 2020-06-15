@@ -1,28 +1,27 @@
 import dotenv from "dotenv"
 import express, { Application as ExpressApplication, Response, Request, NextFunction } from "express"
 import mongoose from "mongoose"
+import cors from "cors"
 
 dotenv.config()
 export class Application {
-    private app: ExpressApplication = express();
-    // private server;
-    // private middleware;
+    private app: ExpressApplication
     private mongoConnectionString: string
 
     public boot() {
+        this.registerMiddlewares()
         this.initializeApplication()
         this.bootDatabase()
+        this.start()
     }
 
     private initializeApplication() {
-        this.app.use(express.json())
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             res.header('Access-Control-Allow-Origin', "*")
             res.header('Access-Control-Allow-Headers', "*")
             res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
             next()
         })
-        this.app.listen((process.env.PORT||3001), () => console.log(`Server started at port ${process.env.PORT}`))
     }
 
     private bootDatabase() {
@@ -35,6 +34,15 @@ export class Application {
         mongoose.connect(this.mongoConnectionString, err => {
             err ? console.log("Error In Connection", err) : console.log("Connection Succeeded")
         })
+    }
+
+    private registerMiddlewares() {
+        this.app.use(express.json())
+        this.app.use(cors())
+    }
+
+    private start(){
+        this.app.listen((process.env.PORT||3001), () => console.log(`Server started at port ${process.env.PORT}`))
     }
 
     constructor() {
