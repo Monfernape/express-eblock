@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { login } from "./login";
 
 export class AuthController {
 

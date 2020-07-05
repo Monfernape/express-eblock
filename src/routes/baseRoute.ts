@@ -37,29 +37,11 @@ export default abstract class BaseRoute {
     }
 
     /**
-     * Perform patch
-     * @param route
-     * @param handlers
-     */
-    protected patch(route: string, ...handlers: RequestHandler[]) {
-        this.router.patch(route, ...handlers);
-    }
-
-    /**
      * Perform delete request, often to delete data
      * @param route
      * @param handlers
      */
     protected delete(route: string, ...handlers: RequestHandler[]) {
         this.router.delete(route, ...handlers);
-    }
-
-    /**
-     * Use group of routes
-     * @param route
-     * @param handlers
-     */
-    protected use(route: any, ...handlers: RequestHandler[]) {
-        this.router.use(route, ...handlers);
     }
 }
