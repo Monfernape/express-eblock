@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
+import { IUser } from "../interfaces"
 
 const userSchema = new Schema({
     name: {type: String, required: true},
@@ -8,4 +9,4 @@ const userSchema = new Schema({
     address: {type: String, required: true}
 })
 
-export default model('user', userSchema)
+export default model<IUser & Document>('user', userSchema)

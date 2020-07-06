@@ -4,7 +4,7 @@ import { login } from "./login";
 export class AuthController {
 
     public static login(req: Request, res: Response, next:NextFunction){
-        //TODO
+        login(req, res, next)
     }
 
     public static signUp(req: Request, res: Response, next:NextFunction){
