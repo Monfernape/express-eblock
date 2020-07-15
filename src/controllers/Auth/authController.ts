@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { login } from "./login";
+import { login, signup } from "./index";
 
 export class AuthController {
 
@@ -8,6 +8,6 @@ export class AuthController {
     }
 
     public static signUp(req: Request, res: Response, next:NextFunction){
-        //TODO
+        signup(req, res, next)
     }
 }

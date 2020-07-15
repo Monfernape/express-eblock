@@ -11,9 +11,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         if(!user) throw new Error('User Not Found')
         const passwordMatch = await bcrypt.compare(password, user.password)
         if(passwordMatch) {
-            delete user.password
-            res.status(200).send(user)
-        }
+            let userData = user.toObject()
+            delete userData.password
+            res.status(200).send(userData)
+        } else res.status(500).send("Unknown Error")
     } catch {
         throw new Error('User Not Found')
     }
