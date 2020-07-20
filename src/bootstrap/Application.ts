@@ -37,14 +37,14 @@ export class Application {
     }
 
     private bootDatabase() {
-        this.mongoConnectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URI}`
+        this.mongoConnectionString = process.env.MONGO_CONNECTION_STRING as string
         mongoose.set('useFindAndModify', false)
         mongoose.set('useCreateIndex', true)
         mongoose.set('useUnifiedTopology', true)
         mongoose.set('useNewUrlParser', true)
 
         mongoose.connect(this.mongoConnectionString, err => {
-            err ? console.log("Error In Connection", err) : console.log("Connection Succeeded")
+            err ? console.log("Error In Connection", err) : console.log("Connection Succeeded", this.mongoConnectionString)
         })
         Database.initializeRepositories()
     }
