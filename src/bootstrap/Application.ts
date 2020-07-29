@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import cors from "cors"
 import { ApplicationRoutes } from "./ApplicationRoutes"
 import { Database } from "../repositories"
+import { ErrorMiddleware } from "./middlewares/ErrorMiddleware"
 
 dotenv.config()
 export class Application {
@@ -14,6 +15,7 @@ export class Application {
         this.initializeApplication()
         this.registerMiddlewares()
         this.addRoutes()
+        this.app.use(ErrorMiddleware.add())
         this.bootDatabase()
         this.start()
     }
@@ -37,14 +39,14 @@ export class Application {
     }
 
     private bootDatabase() {
-        this.mongoConnectionString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URI}`
+        this.mongoConnectionString = process.env.MONGO_CONNECTION_STRING as string
         mongoose.set('useFindAndModify', false)
         mongoose.set('useCreateIndex', true)
         mongoose.set('useUnifiedTopology', true)
         mongoose.set('useNewUrlParser', true)
 
         mongoose.connect(this.mongoConnectionString, err => {
-            err ? console.log("Error In Connection", err) : console.log("Connection Succeeded")
+            err ? console.log("Error In Connection", err) : console.log("Connection Succeeded", this.mongoConnectionString)
         })
         Database.initializeRepositories()
     }
@@ -55,6 +57,6 @@ export class Application {
 
     constructor() {
         this.app = express();
-        this.mongoConnectionString = ""
+        this.mongoConnectionString = "";
     }
 }
