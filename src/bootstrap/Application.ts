@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import cors from "cors"
 import { ApplicationRoutes } from "./ApplicationRoutes"
 import { Database } from "../repositories"
-import { ErrorMiddleware } from "./middlewares/ErrorMiddleware"
+import { ErrorHandler } from "./middlewares/ErrorHandler"
 
 dotenv.config()
 export class Application {
@@ -15,7 +15,7 @@ export class Application {
         this.initializeApplication()
         this.registerMiddlewares()
         this.addRoutes()
-        this.app.use(ErrorMiddleware.add())
+        this.registerErrorMiddleware()
         this.bootDatabase()
         this.start()
     }
@@ -36,6 +36,10 @@ export class Application {
 
     private addRoutes(){
         ApplicationRoutes.register(this.app)
+    }
+
+    private registerErrorMiddleware(){
+        this.app.use(ErrorHandler)
     }
 
     private bootDatabase() {
