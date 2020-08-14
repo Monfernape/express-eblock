@@ -13,8 +13,8 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     const pass = await bcrypt.hash(password, 10)
     try {
         const user = await Database.userRepository.signup({...req.body, password: pass})
-        user && res.status(200).send("User created")
-    } catch {
+        user && res.status(200).send({ message: "User created" })
+    } catch (error) {
         next(new NotFoundError())
     }
 }
